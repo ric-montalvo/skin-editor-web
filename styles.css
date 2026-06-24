@@ -133,32 +133,50 @@ body {
    ADAPTACIÓN PARA CELULARES (RESPONSIVE)
    ========================================== */
 @media (max-width: 768px) {
-    .workspace {
-        flex-direction: column; /* Apila todo en vertical */
+    /* 1. La magia para engañar a Chrome/Safari móvil */
+    body, html {
+        height: 100dvh; /* DVH calcula el tamaño REAL visible restando los menús del navegador */
+        overflow: hidden; /* Evita que la pantalla "rebote" al hacer scroll */
     }
 
+    .workspace {
+        flex-direction: column;
+        height: 100dvh; 
+    }
+
+    /* 2. Convertimos las herramientas en barras horizontales */
     .toolbar {
         width: 100%;
         height: 60px;
-        flex-direction: row; /* Herramientas en horizontal */
+        flex-direction: row; 
         justify-content: space-around;
         padding: 0 8px;
     }
 
-    .left-toolbar {
-        order: 3; /* Manda las herramientas abajo */
-    }
-
     .right-toolbar {
-        order: 1; /* Manda el zoom e historial arriba */
+        order: 1; 
     }
 
+    /* 3. Pegamos la barra de dibujo al fondo del celular */
+    .left-toolbar {
+        order: 3;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background-color: #1e1e1e; /* El color de tu interfaz */
+        z-index: 1000; /* Asegura que flote sobre todo */
+        padding-bottom: env(safe-area-inset-bottom); /* Protege contra la barra gestual de iPhone/Android */
+        box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.4); /* Sombrita para que resalte */
+    }
+
+    /* 4. Le damos espacio al lienzo para que no quede escondido detrás de la barra inferior */
     .canvas-container {
-        order: 2; /* El lienzo en medio */
+        order: 2; 
+        margin-bottom: 70px; 
     }
 
     .top-bar .logo {
-        display: none; /* Oculta el texto del logo para hacer espacio */
+        display: none; 
     }
 }
 
