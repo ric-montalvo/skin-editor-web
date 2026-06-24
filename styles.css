@@ -238,7 +238,7 @@ body {
    ========================================== */
 #panel-partes-3d {
     position: absolute;
-    bottom: 20px;
+    top: 20px; /* MAGIA 1: Lo colgamos del techo en lugar del piso */
     left: 20px;
     background-color: rgba(0, 0, 0, 0.7);
     padding: 15px;
@@ -247,6 +247,10 @@ body {
     font-family: sans-serif;
     box-shadow: 0 4px 10px rgba(0,0,0,0.5);
     z-index: 10000;
+    
+    /* MAGIA 2: Si la pantalla es muy chaparra, le damos scroll interno */
+    max-height: 85vh; 
+    overflow-y: auto; 
 }
 
 #panel-partes-3d h3 {
@@ -266,17 +270,22 @@ body {
 
 #panel-partes-3d input[type="checkbox"] {
     margin-right: 8px;
-    transform: scale(1.2); /* Hace la casilla más grande para los dedos */
+    transform: scale(1.2); 
 }
 
 /* Ajuste para pantallas muy chicas */
 @media (max-width: 480px) {
     #panel-partes-3d {
-        bottom: 10px;
-        left: 10px;
-        padding: 10px;
+        top: 15px; /* Anclado arriba con un pequeño margen */
+        left: 15px;
+        padding: 12px;
+        max-width: 65vw; /* Evita que choque con el botón rojo de cerrar (X) de la derecha */
     }
     #panel-partes-3d label {
-        font-size: 12px;
+        font-size: 13px;
+        margin-bottom: 12px; /* Un poco más de separación para no picar dos con el dedo gordo */
+    }
+    #panel-partes-3d h3 {
+        font-size: 14px;
     }
 }
