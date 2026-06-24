@@ -128,15 +128,11 @@ body {
     display: none !important;
 }
 
-
-/* ==========================================
-   ADAPTACIÓN PARA CELULARES (RESPONSIVE)
-   ========================================== */
 @media (max-width: 768px) {
-    /* 1. La magia para engañar a Chrome/Safari móvil */
+    /* 1. Mantenemos el DVH para que la pantalla no rebote */
     body, html {
-        height: 100dvh; /* DVH calcula el tamaño REAL visible restando los menús del navegador */
-        overflow: hidden; /* Evita que la pantalla "rebote" al hacer scroll */
+        height: 100dvh; 
+        overflow: hidden; 
     }
 
     .workspace {
@@ -151,28 +147,27 @@ body {
         flex-direction: row; 
         justify-content: space-around;
         padding: 0 8px;
+        position: relative; /* Quitamos cualquier posición fija */
+        border-bottom: 1px solid #333; /* Una línea sutil para separar las barras */
     }
 
+    /* 3. El orden: Primero la barra de Zoom/Deshacer */
     .right-toolbar {
         order: 1; 
     }
 
-    /* 3. Pegamos la barra de dibujo al fondo del celular */
+    /* 4. Segundo: La barra de Lápiz/Borrador/Gotero (justo debajo de la anterior) */
     .left-toolbar {
-        order: 3;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        background-color: #1e1e1e; /* El color de tu interfaz */
-        z-index: 1000; /* Asegura que flote sobre todo */
-        padding-bottom: env(safe-area-inset-bottom); /* Protege contra la barra gestual de iPhone/Android */
-        box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.4); /* Sombrita para que resalte */
+        order: 2;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Sombra hacia abajo */
+        z-index: 100; /* Para que la sombra flote sobre el lienzo */
     }
 
-    /* 4. Le damos espacio al lienzo para que no quede escondido detrás de la barra inferior */
+    /* 5. Tercero: El lienzo ocupa todo el resto del espacio libre hacia abajo */
     .canvas-container {
-        order: 2; 
-        margin-bottom: 70px; 
+        order: 3; 
+        margin-bottom: 0; /* Quitamos el margen que le habíamos puesto */
+        flex-grow: 1; /* Esto empuja el lienzo para que llene la pantalla restante */
     }
 
     .top-bar .logo {
