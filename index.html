@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SC Skin Editor Online</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="top-bar">
+        <div class="logo">SC Skin Editor</div>
+        <div class="acciones">
+            <button id="btn-donar" class="btn-amarillo">☕ APOYA LA APP</button>
+			<!-- NUEVO: Selector de skins por defecto -->
+            <select id="select-default-skins" style="background-color: #333; color: white; padding: 5px; border-radius: 5px; border: 1px solid #555; margin-right: 10px;">
+                <option value="./assets/img/walter.png">Walter (Default)</option>
+                <option value="./assets/img/basil.png">Basil</option>
+                <option value="./assets/img/geoffrey.png">Geoffrey</option>
+                <option value="./assets/img/zachary.png">Zachary</option>
+                <option value="./assets/img/ada.png">Ada</option>
+                <option value="./assets/img/doris.png">Doris</option>
+                <option value="./assets/img/mabel.png">Mabel</option>
+                <option value="./assets/img/shirley.png">Shirley</option>
+            </select>
+			
+            <button id="btn-3d"><img src="./assets/img/ic_3d.svg" alt="3D"></button>
+            <button id="btn-cargar"><img src="./assets/img/ic_cargar.svg" alt="Cargar"></button>
+            <button id="btn-guardar"><img src="./assets/img/ic_guardar.svg" alt="Guardar"></button>
+			<input type="file" id="input-cargar-skin" accept="image/png" style="display: none;">
+        </div>
+    </header>
+
+    <main class="workspace">
+        
+        <aside class="toolbar left-toolbar">
+            <button id="tool-lapiz" class="tool-btn activo"><img src="./assets/img/ic_lapiz.svg" alt="Lápiz"></button>
+            <button id="tool-borrador" class="tool-btn"><img src="./assets/img/ic_borrador.svg" alt="Borrador"></button>
+            <button id="tool-gotero" class="tool-btn"><img src="./assets/img/ic_cuentagotas.svg" alt="Cuentagotas"></button>
+            <button id="tool-mover" class="tool-btn"><img src="./assets/img/ic_mover.svg" alt="Mover"></button>
+            
+            <input type="color" id="color-picker" value="#000000">
+        </aside>
+
+        <section class="canvas-container" id="canvas-container">
+            <canvas id="skin-canvas" width="64" height="64"></canvas>
+        </section>
+
+        <aside class="toolbar right-toolbar">
+            <button id="btn-undo" class="tool-btn"><img src="./assets/img/ic_undo.svg" alt="Deshacer"></button>
+            <button id="btn-redo" class="tool-btn"><img src="./assets/img/ic_redo.svg" alt="Rehacer"></button>
+            <button id="btn-zoom-in" class="tool-btn"><img src="./assets/img/ic_zoom_in.svg" alt="Zoom In"></button>
+            <button id="btn-zoom-out" class="tool-btn"><img src="./assets/img/ic_zoom_out.svg" alt="Zoom Out"></button>
+        </aside>
+
+    </main>
+
+   <div id="preview-3d-container" class="oculto">
+    <button id="btn-cerrar-3d">&times;</button>
+	<div id="panel-partes-3d">
+        <h3>Mostrar Partes</h3>
+        <label><input type="checkbox" data-part="Head" checked> Cabeza</label>
+        <label><input type="checkbox" data-part="Body" checked> Cuerpo</label>
+        <label><input type="checkbox" data-part="Hand1" checked> Brazo Izquierdo</label>
+        <label><input type="checkbox" data-part="Hand2" checked> Brazo Derecho</label>
+        <label><input type="checkbox" data-part="Leg1" checked> Pierna Izquierda</label>
+        <label><input type="checkbox" data-part="Leg2" checked> Pierna Derecha</label>
+    </div>
+	
+	
+    <canvas id="canvas-3d"></canvas>
+	</div>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
